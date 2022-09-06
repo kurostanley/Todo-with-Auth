@@ -1,35 +1,38 @@
 <body>
-    <div class="container">
-        <h1>Hi <%= name %></h1>
-        <h1 id="head">To-Do list</h1>
-        <form id="form" action="/add" method="post">
-            <label for="inputfield">New Thing Todo</label>
-            <input type="text" id="inputfield" name="inputfield" placeholder="Reading" required>
-            <button id="additem" type="submit">add</button>
-        </form>
-    </div>
-    <div class="container">
-            <ul id="todoholder">
-                <% for(let i = 0; i < newListItem.length; i++){ %>
+    <div class="row mt-5">
+        <div class="col-md-6 m-auto">
+          <div class="card card-body">    
+                <div class="container">
+                    <h1><%= name %></h1>
+                    <form id="form" action="/add" method="post">
+                        <label for="inputfield" class="mb-5">New Thing Todo</label>
+                        <input type="text" id="inputfield" name="inputfield" placeholder="Reading" required>
+                        <button id="additem" type="submit" class="btn btn-secondary">add</button>
+                    </form>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="card-header">
+                        To-Do list
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <% for(let i = 0; i < newListItem.length; i++){ %>
                     <form action="/delete" method="post">
-                        <li> <input type="checkbox" name="checkbox" value="<%= i%>" onchange="this.form.submit()" id="checkbox">
+                        <li class="list-group-item"> <input type="checkbox" name="checkbox" value="<%= i%>" onchange="this.form.submit()" id="checkbox">
                             <%= newListItem[i] %>
                         </li> 
                     </form>
-                <% } %>
-            </ul>
-    </div>
-    <div class="container">
-        <form action="/reset" method="post">
-            <button>reset</button>
-        </form>
-    </div>
-    <a href="/users/logout">logout</a>
-    <!-- <div class="container">
-        <form action="/" method="post">
-            <button name="reset" value="clean">reset</button>
-        </form>
-    </div>     -->
+                    <% } %>
+                    </ul>
+                </div>
+                <form action="/reset" method="post" class="my-3">
+                    <button class="d-inline btn btn-secondary">Reset</button>
+                </form>
+                <div>
+                    <a href="/users/logout" class=" btn btn-secondary">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>            
     <script src="app.js"></script>
 </body>
 </html>

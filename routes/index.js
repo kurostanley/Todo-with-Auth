@@ -1,18 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = express('mongoose');
-const { ensureAuthenticated  }= require('../config/auth');
+const { ensureAuthenticated, ensureAuthenticatedInWelcome  }= require('../config/auth');
 
 // Welcome Page
-router.get('/', (req, res) => 
+router.get('/', ensureAuthenticatedInWelcome, (req, res) => 
     res.render('welcome'));
 
 // Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) => 
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    if(req.user.todo.length == 0){
+        let intro = ['add', 'something', 'todo!','checkbox','is to delete item'];
+        intro.forEach(element => {
+            req.user.todo.push(element);
+        });
+        req.user.save();
+    }
     res.render('dashboard', {
         name: req.user.name,
         newListItem:  req.user.todo
-    }));
+    }
+)});
 
 
 // add new to-do
@@ -29,7 +37,6 @@ router.post('/delete', function(req, res){
     console.log(req.body.checkbox);
     req.user.todo.splice(req.body.checkbox, 1);
     req.user.save();
-    console.log("success delete");
     res.redirect('/dashboard')
 })
 
