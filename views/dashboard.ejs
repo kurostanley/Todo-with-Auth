@@ -1,0 +1,35 @@
+<body>
+    <div class="container">
+        <h1>Hi <%= name %></h1>
+        <h1 id="head">To-Do list</h1>
+        <form id="form" action="/add" method="post">
+            <label for="inputfield">New Thing Todo</label>
+            <input type="text" id="inputfield" name="inputfield" placeholder="Reading" required>
+            <button id="additem" type="submit">add</button>
+        </form>
+    </div>
+    <div class="container">
+            <ul id="todoholder">
+                <% for(let i = 0; i < newListItem.length; i++){ %>
+                    <form action="/delete" method="post">
+                        <li> <input type="checkbox" name="checkbox" value="<%= i%>" onchange="this.form.submit()" id="checkbox">
+                            <%= newListItem[i] %>
+                        </li> 
+                    </form>
+                <% } %>
+            </ul>
+    </div>
+    <div class="container">
+        <form action="/reset" method="post">
+            <button>reset</button>
+        </form>
+    </div>
+    <a href="/users/logout">logout</a>
+    <!-- <div class="container">
+        <form action="/" method="post">
+            <button name="reset" value="clean">reset</button>
+        </form>
+    </div>     -->
+    <script src="app.js"></script>
+</body>
+</html>
