@@ -11,9 +11,10 @@ const app = express();
 
 // Passprot config
 require('./config/passport')(passport);
+require('dotenv').config();
 
 //DB config
-const db = require('./config/keys').MongoURI;
+const db = process.env.MongoURI;
 
 //Connect to Mongo
 mongoose.connect(db, { useNewUrlParser: true })
@@ -55,8 +56,8 @@ app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 
 // server configuration
-const PORT = process.env.PORT || 5000;
- 
+const PORT = process.env.PORT;
+
 app.listen(PORT, console.log(`Server start on port ${PORT}`))
 
 
