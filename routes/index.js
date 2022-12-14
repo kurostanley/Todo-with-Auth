@@ -31,7 +31,7 @@ router.post('/add', function(req, res){
     res.redirect('/dashboard')
 })
 
-// test1
+// test
 
 // delete a to-do
 router.post('/delete', function(req, res){
