@@ -8,7 +8,6 @@ const passport = require('passport');
 
 const app = express();
 
-// test
 
 // Passprot config
 require('./config/passport')(passport);
